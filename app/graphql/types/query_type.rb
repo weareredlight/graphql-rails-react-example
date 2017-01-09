@@ -5,7 +5,7 @@ QueryType = GraphQL::ObjectType.define do
   field :project, ProjectType do
     argument :id, !types.ID
     description 'Find a Project by ID'
-    resolve ->(obj, args, ctx) { Project.find(args["id"]) }
+    resolve ->(obj, args, ctx) { Project.find(args[:id]) }
   end
 
   field :projects, types[ProjectType] do
@@ -14,13 +14,22 @@ QueryType = GraphQL::ObjectType.define do
   end
 
   field :time_log, TimeLogType do
-    argument :id, !types.ID
+    argument :id,      types.ID
+    argument :running, types.Boolean
     description 'Find a TimeLog by ID'
-    resolve ->(obj, args, ctx) { TimeLog.find(args["id"]) }
+    resolve ->(obj, args, ctx) {
+      if args[:id]
+        TimeLog.find(args[:id])
+      elsif args[:running]
+        TimeLog.where(stopped_at: nil).last
+      else
+        nil
+      end
+    }
   end
 
   field :time_logs, types[TimeLogType] do
-    description 'Return all time logs'
-    resolve ->(obj, args, ctx) { TimeLog.all }
+    description 'Return all finished time logs'
+    resolve ->(obj, args, ctx) { TimeLog.where.not(stopped_at: nil) }
   end
 end

@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "apollo-client": "latest",
+    "bootstrap": "latest",
     "graphql-tag": "latest",
     "react": "latest",
     "react-apollo": "latest",

@@ -1,5 +1,11 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
+.mt-5   { margin-top: 5px   }
+.mt-50  { margin-top: 50px  }
+.mt-100 { margin-top: 100px }
+
+.mb-5   { margin-bottom: 5px }
+
+.ml-5   { margin-left: 5px   }
+.ml-10  { margin-left: 10px  }
+.ml-100 { margin-left: 100px }
+
+.w-80pct { width: 80% }
