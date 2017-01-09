@@ -30,6 +30,10 @@ QueryType = GraphQL::ObjectType.define do
 
   field :time_logs, types[TimeLogType] do
     description 'Return all finished time logs'
-    resolve ->(obj, args, ctx) { TimeLog.where.not(stopped_at: nil) }
+    resolve ->(obj, args, ctx) {
+      TimeLog.where.not(stopped_at: nil)
+             .order(started_at: :desc)
+             .includes(:project)
+    }
   end
 end

@@ -10,7 +10,7 @@ module ProjectMutations
 
     # The resolve proc is where you alter the system state.
     resolve ->(obj, args, ctx) {
-      Project.create(args.to_h)
+      Project.find_or_create_by(args.to_h)
     }
   end
 end
