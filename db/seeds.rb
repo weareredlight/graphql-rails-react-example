@@ -5,3 +5,14 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+1.upto(10) do |i|
+  p = Project.create!(name: "Project #{i}")
+  1.upto(10) do |j|
+    p.time_logs.create!(
+      name: "Task #{i} #{j}",
+      started_at: (j+1).minutes.ago,
+      stopped_at: j.minutes.ago
+    )
+  end
+end
