@@ -41,6 +41,7 @@ GEM
     arel (7.1.4)
     builder (3.2.2)
     byebug (9.0.6)
+    coderay (1.1.1)
     concurrent-ruby (1.0.4)
     erubis (2.7.0)
     ffi (1.9.14)
@@ -64,6 +65,13 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-byebug (3.4.2)
+      byebug (~> 9.0)
+      pry (~> 0.10)
     puma (3.6.2)
     rack (2.0.1)
     rack-test (0.6.3)
@@ -95,6 +103,7 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    slop (3.6.0)
     spring (2.0.0)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -120,9 +129,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  byebug
   graphql
   listen (~> 3.0.5)
+  pry-byebug
   puma (~> 3.0)
   rails (~> 5.0.1)
   spring
