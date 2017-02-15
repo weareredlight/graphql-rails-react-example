@@ -26,17 +26,23 @@ class App extends Component {
       this.setTimer();
       this.setState({ project: time_log.project.name, task: time_log.name });
     }
+    else {
+      this.setState({ project: '', task: '' });
+    }
   }
 
 
   setTimer = () => {
-    clearInterval(this.timerId);
-    this.timerId = setInterval(() => {
-      this.setState({
-        timer: (new Date().getTime() / 1000) -
-               (Date.parse(this.props.timer.time_log.started_at) / 1000)
-      });
-    }, 1000);
+    clearInterval(this.intervalId);
+    this.intervalId = setInterval(this.intervalFunc , 1000);
+  }
+
+
+  intervalFunc = () => {
+    this.setState({
+      timer: (new Date().getTime() / 1000) -
+             (Date.parse(this.props.timer.time_log.started_at) / 1000)
+    });
   }
 
 
@@ -57,7 +63,7 @@ class App extends Component {
 
   stopTimer = () => {
     const { time_log } = this.props.timer;
-    clearInterval(this.timerId);
+    clearInterval(this.intervalId);
     this.setState({ timer: null, project: '', task: '' });
     this.props.update_time_log({
       variables: {
@@ -66,7 +72,7 @@ class App extends Component {
           stopped_at: new Date()
         }
       }
-    }).then(this.props.list.refetch);
+    }).then(this.props.list.refetch).then(this.props.timer.refetch);
   }
 
 
